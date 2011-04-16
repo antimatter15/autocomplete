@@ -1,0 +1,40 @@
+<style>
+body {
+	font-family: sans-serif;
+}
+.autocomplete {
+	background-color: white;
+	border: 1px solid gray;
+	cursor: default;
+	overflow-x: hidden;
+}
+
+.autocomplete .item {
+	width: 100%;
+	font-size: 32px;
+	padding: 0.2em;
+}
+
+.autocomplete .item.highlight {
+	background-color: #4C59A6;
+	background-color: Highlight;
+}
+</style>
+<input type="text" id="search" style="width: 500px; border: 1px solid gray; font-size: 32px; padding: 0.2em">
+<div id="autocomplete" class="autocomplete" style="width: 498px;display:none">
+</div>
+
+
+<script src="autocomplete.js"></script>
+
+<script src="demodata.js"></script>
+
+<script>
+	autocomplete(document.getElementById('search'), document.getElementById('autocomplete'), function(value){
+		return words.filter(function(e){
+			return e.indexOf(value) != -1
+		}).sort(function(e, v){
+			return e.indexOf(value) - v.indexOf(value)
+		}).slice(0, 12);
+	})
+</script>
